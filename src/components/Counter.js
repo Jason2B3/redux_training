@@ -6,8 +6,7 @@ import { counterActions } from "../store/store-center";
 const Counter = () => {
   //$ ACCESS REDUX STORE VALUES
   const counterVal = useSelector((state) => {
-    console.log(state)
-    return state.counter;
+    return state.cValue;
   });
   const showCounter = useSelector((state) => state.showCounter);
 
@@ -17,7 +16,7 @@ const Counter = () => {
   const down = () => dispatch(counterActions.decrement());
   const toggleCounterHandler = () => dispatch(counterActions.toggle());
   // Place payloads inside the identifier function brackets
-  const upMore = () => dispatch(counterActions.incrementMore(5)); 
+  const upMore = () => dispatch(counterActions.incrementMore(5));
 
   return (
     <main className={classes.counter}>

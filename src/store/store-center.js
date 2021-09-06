@@ -1,22 +1,22 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 //$ Define your initial state
-const initialState = { counter: 0, showCounter: true };
+const initialState = { cValue: 0, showCounter: true };
 
 //$ Create your slice or slices
 const counterSlice = createSlice({
-  name: "Counter", // expected built-in KVP
+  name: "counter", // expected built-in KVP
   initialState, // ES6 shorthand to place obj as a KVP value
   reducers: {
     // A list of identifier functions
     increment: (state) => {
-      state.counter++;
+      state.cValue++;
     },
     decrement: (state) => {
-      state.counter--;
+      state.cValue--;
     },
     incrementMore: (state, action) => {
-      state.counter = state.counter + action.payload;
+      state.cValue = state.cValue + action.payload;
     },
     toggle: (state) => {
       state.showCounter = !state.showCounter;
