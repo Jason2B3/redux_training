@@ -1,20 +1,28 @@
 import classes from "./Counter.module.css";
+
 import { useSelector, useDispatch } from "react-redux";
+import { counterActions } from "../store/store-center";
 
 const Counter = () => {
-  //  grab the parts of the state object you need
-  const counterVal = useSelector((state) => state.counter);
-  const showCounterBoolean = useSelector((state) => state.showCounter);
-  // Give yourself the ability to use the reducer's dispatch function
+  //$ ACCESS REDUX STORE VALUES
+  const counterVal = useSelector((state) => {
+    console.log(state)
+    return state.counter;
+  });
+  const showCounter = useSelector((state) => state.showCounter);
+
+  //$ DISPATCH ACTIONS ACCORDING TO THE NEW IDENTIFIER-FUNCTION NAMES
   const dispatch = useDispatch();
-  const up = () => dispatch({ type: "increment" });
-  const down = () => dispatch({ type: "decrement" });
-  const upMore = () => dispatch({ type: "increment more", amount: 5 });
-  const toggleCounterHandler = () => dispatch({ type: "toggle" });
+  const up = () => dispatch(counterActions.increment());
+  const down = () => dispatch(counterActions.decrement());
+  const toggleCounterHandler = () => dispatch(counterActions.toggle());
+  // Place payloads inside the identifier function brackets
+  const upMore = () => dispatch(counterActions.incrementMore(5)); 
+
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      {showCounterBoolean && <div className={classes.value}>{counterVal}</div>}
+      {showCounter && <div className={classes.value}>{counterVal}</div>}
       <div>
         <button onClick={up}>Increase by 1</button>
         <button onClick={down}>Decrease by 1</button>

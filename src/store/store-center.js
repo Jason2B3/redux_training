@@ -1,22 +1,37 @@
-import { createStore } from "redux";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-// Create a store, then define your reducer function:
-const initState = { counter: 0, showCounter: true };
-const counterReducer = function (state = initState, action) {
-  switch (action.type) {
-    case "increment":
-      return { ...state, counter: state.counter + 1 };
-    case "decrement":
-      return { ...state, counter: state.counter - 1 };
-    case "increment more":
-      return { counter: state.counter + action.amount };
-    case "toggle":
-      return { ...state, showCounter: !state.showCounter };
-  }
-  return state;
-};
-const store = createStore(counterReducer);
+//$ Define your initial state
+const initialState = { counter: 0, showCounter: true };
+
+//$ Create your slice or slices
+const counterSlice = createSlice({
+  name: "Counter", // expected built-in KVP
+  initialState, // ES6 shorthand to place obj as a KVP value
+  reducers: {
+    // A list of identifier functions
+    increment: (state) => {
+      state.counter++;
+    },
+    decrement: (state) => {
+      state.counter--;
+    },
+    incrementMore: (state, action) => {
+      state.counter = state.counter + action.payload;
+    },
+    toggle: (state) => {
+      state.showCounter = !state.showCounter;
+    },
+  },
+});
+
+//$ Create a store with the configureStore method
+// looks different when multiple slices are present
+const store = configureStore({
+  reducer: counterSlice.reducer,
+});
+
+//$ Enable dispatching Step 1 of 3
+export const counterActions = counterSlice.actions;
+
+//$ Default export the Redux store
 export default store;
-
-// const counter_slice= createS
