@@ -1,12 +1,10 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-//$ Define your initial state
-const initialState = { cValue: 0, showCounter: true };
-
-//$ Create your slice or slices
+//$ Create a state slice for an incrementor value (used in Counter.js)
+const initCounter = { cValue: 0, showCounter: true };
 const counterSlice = createSlice({
   name: "counter", // expected built-in KVP
-  initialState, // ES6 shorthand to place obj as a KVP value
+  initialState: initCounter,
   reducers: {
     // A list of identifier functions
     increment: (state) => {
@@ -23,15 +21,31 @@ const counterSlice = createSlice({
     },
   },
 });
-
-//$ Create a store with the configureStore method
-// looks different when multiple slices are present
-const store = configureStore({
-  reducer: counterSlice.reducer,
-});
-
-//$ Enable dispatching Step 1 of 3
 export const counterActions = counterSlice.actions;
+// ——————————————————————————————————————————————————————
+//$ Create a state slice for Login status (used in Auth.js and Header.js)
+const initAuth = { isLoggedIn: false };
+const isAuthSlice = createSlice({
+  name: "isAuthenticated", // expected built-in KVP
+  initialState: initAuth,
+  reducers: {
+    login: (state) => {
+      state.isLoggedIn = true;
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+    },
+  },
+});
+export const authActions = isAuthSlice.actions;
+// ——————————————————————————————————————————————————————
+//$ Create a store with the configureStore method (multiple slices)
+const store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer,
+    authentication: isAuthSlice.reducer,
+  },
+});
 
 //$ Default export the Redux store
 export default store;

@@ -6,9 +6,9 @@ import { counterActions } from "../store/store-center";
 const Counter = () => {
   //$ ACCESS REDUX STORE VALUES
   const counterVal = useSelector((state) => {
-    return state.cValue;
+    return state.counter.cValue;
   });
-  const showCounter = useSelector((state) => state.showCounter);
+  const showCounter = useSelector((state) => state.counter.showCounter);
 
   //$ DISPATCH ACTIONS ACCORDING TO THE NEW IDENTIFIER-FUNCTION NAMES
   const dispatch = useDispatch();
