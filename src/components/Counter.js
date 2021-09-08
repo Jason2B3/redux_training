@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Counter = () => {
   //  grab the parts of the state object you need
-  const counterVal = useSelector((state) => state.counter);
-  const showCounterBoolean = useSelector((state) => state.showCounter);
+  const counterVal = useSelector((state) => state.increment.counter);
+  const showCounterBoolean = useSelector((state) => state.toggle.showCounter);
   // Give yourself the ability to use the reducer's dispatch function
   const dispatch = useDispatch();
   const up = () => dispatch({ type: "increment" });

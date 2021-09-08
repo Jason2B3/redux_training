@@ -1,10 +1,7 @@
-import { createStore } from "redux";
-// Create a store, then define your reducer function:
 const stateObj = {
   counter: 0,
-  showCounter: true,
 };
-const counterReducer = function (state = stateObj, action) {
+export const incrementReducer = function (state = stateObj, action) {
   switch (action.type) {
     case "increment":
       return { ...state, counter: state.counter + 1 };
@@ -12,10 +9,6 @@ const counterReducer = function (state = stateObj, action) {
       return { ...state, counter: state.counter - 1 };
     case "incrementMore":
       return { ...state, counter: state.counter + action.amount }; // USE PAYLOAD HERE
-    case "toggle":
-      return { ...state, showCounter: !state.showCounter };
   }
   return state;
 };
-const store = createStore(counterReducer);
-export default store;
