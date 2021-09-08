@@ -10,8 +10,10 @@ const counterReducer = function (state = stateObj, action) {
       return { ...state, counter: state.counter + 1 };
     case "decrement":
       return { ...state, counter: state.counter - 1 };
+    case "incrementMore":
+      return { ...state, counter: state.counter + action.amount }; // USE PAYLOAD HERE
     case "toggle":
-      return {...state, showCounter: !state.showCounter}
+      return { ...state, showCounter: !state.showCounter };
   }
   return state;
 };
